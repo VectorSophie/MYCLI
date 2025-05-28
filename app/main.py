@@ -10,6 +10,8 @@ def __type__(args, commands):
 
     if args[0] in commands:
         print(f"{args[0]} is a shell builtin")
+        return
+    
     path_env = os.environ.get("PATH", "")
 
     for directory in path_env.split(":"):
