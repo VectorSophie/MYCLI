@@ -7,15 +7,15 @@ def main():
 
     # Wait for user input
     enter = input()
-    command = enter[:4]
-    args = enter[5:]
+    commarr=enter.split()
+    command = commarr[0]
+    args = commarr[1] if len(commarr) > 1 else ""
     if command == "exit":
         sys.exit(0)
     elif command == "echo":
         print(args)
-
-    print(f"{enter}: command not found")
-    main()
+    else:
+        print(f"{command}: command not found")
 
 if __name__ == "__main__":
     main()
