@@ -9,11 +9,11 @@ def main():
     enter = input()
     commarr=enter.split()
     command = commarr[0]
-    args = commarr[1] if len(commarr) > 1 else ""
+    args = commarr[1:] if len(commarr) > 1 else ""
     if command == "exit":
         sys.exit(0)
     elif command == "echo":
-        print(args)
+        print(*args)
     else:
         print(f"{command}: command not found")
 
