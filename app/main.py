@@ -29,6 +29,7 @@ def main():
 
     while True:
         sys.stdout.write("$ ")
+        sys.stdout.flush()
         enter = input()
         if not enter.strip():
             continue
