@@ -6,10 +6,15 @@ def main():
     sys.stdout.write("$ ")
 
     # Wait for user input
-    command = input()
-    if command[:4] == "exit":
+    enter = input()
+    command = enter[:4]
+    args = enter[4:]
+    if command == "exit":
         sys.exit(0)
-    print(f"{command}: command not found")
+    elif command == "echo":
+        print(args)
+
+    print(f"{enter}: command not found")
     main()
 
 if __name__ == "__main__":
