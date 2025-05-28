@@ -2,15 +2,12 @@ import sys
 
 
 def main():
+    while True:
+        sys.stdout.write("$ ")
 
-    sys.stdout.write("$ ")
-    sys.stdout.flush()
-
-    # Wait for user input
     enter = input()
     commarr=enter.split()
-    if not commarr:
-        continue
+
     command = commarr[0]
     args = commarr[1:]
     if command == "exit":
@@ -19,8 +16,8 @@ def main():
     elif command == "echo":
         print(" ".join(args))
         continue
-
-    print(f"{command}: command not found")
+    else:
+        print(f"{command}: command not found")
 
 if __name__ == "__main__":
     main()
