@@ -9,14 +9,18 @@ def main():
     # Wait for user input
     enter = input()
     commarr=enter.split()
+    if not commarr:
+        continue
     command = commarr[0]
-    args = commarr[1:] if len(commarr) > 1 else ""
+    args = commarr[1:]
     if command == "exit":
         sys.exit(0)
+        continue
     elif command == "echo":
-        print(*args)
-    else:
-        print(f"{command}: command not found")
+        print(" ".join(args))
+        continue
+
+    print(f"{command}: command not found")
 
 if __name__ == "__main__":
     main()
