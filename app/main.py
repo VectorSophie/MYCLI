@@ -8,7 +8,7 @@ def main():
     # Wait for user input
     enter = input()
     command = enter[:4]
-    args = enter[4:]
+    args = enter[5:]
     if command == "exit":
         sys.exit(0)
     elif command == "echo":
