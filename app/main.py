@@ -4,10 +4,20 @@ def __echo__(args):
     print(" ".join(args))
 
 def __type__(args, commands):
-    if args and args[0] in commands:
+    if not args:
+        return
+
+    if args[0] in commands:
         print(f"{args[0]} is a shell builtin")
-    else:
-        print(f"{args[0]}: not found")
+    path_env = os.environ.get("PATH", "")
+
+    for directory in path_env.split(":"):
+        full_path = os.path.join(directory, cmd)
+        if os.path.isfile(full_path):
+            print(f"{cmd} is {full_path}")
+            return
+
+    print(f"{args[0]}: not found")
 
 def main():
     commands = {
