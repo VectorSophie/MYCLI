@@ -1,4 +1,5 @@
 import sys
+import os
 
 def __echo__(args):
     print(" ".join(args))
@@ -12,9 +13,9 @@ def __type__(args, commands):
     path_env = os.environ.get("PATH", "")
 
     for directory in path_env.split(":"):
-        full_path = os.path.join(directory, cmd)
+        full_path = os.path.join(directory, args[0])
         if os.path.isfile(full_path):
-            print(f"{cmd} is {full_path}")
+            print(f"{args[0]} is {full_path}")
             return
 
     print(f"{args[0]}: not found")
