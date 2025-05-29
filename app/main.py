@@ -1,32 +1,55 @@
 import sys
 import os
 
-def __echo__(args):
+def echo_cmd(args):
     print(" ".join(args))
 
-def __type__(args, commands):
+def type_cmd(args, commands):
     if not args:
         return
 
-    if args[0] in commands:
-        print(f"{args[0]} is a shell builtin")
-        return
-    
+    target = args[0]
+    if target in commands:
+        print(f"{target} is a shell builtin")
+    else:
+        result = findtarget(target)
+        if result:
+            print(f"{target} is {result}")
+        else:
+            print(f"{target}: not found")
+
+def findtarget(target):
     path_env = os.environ.get("PATH", "")
+    paths = path_env.split(":")
+    for directory in paths:
+        try:
+            for file in os.listdir(directory):
+                if file == target:
+                    full_path = os.path.join(directory, file)
+                    if os.path.isfile(full_path) and os.access(full_path, os.X_OK):
+                        return full_path
+        except Exception:
+            continue
+    return None
 
-    for directory in path_env.split(":"):
-        full_path = os.path.join(directory, args[0])
-        if os.path.isfile(full_path):
-            print(f"{args[0]} is {full_path}")
-            return
+def find_cmd(args):
+    if not args:
+        print("find: missing argument")
+        return
 
-    print(f"{args[0]}: not found")
+    target = args[0]
+    result = findtarget(target)
+    if result:
+        print(result)
+    else:
+        print(f"{target}: not found")
 
 def main():
     commands = {
         "exit": lambda args: sys.exit(0),
-        "echo": __echo__,
-        "type": lambda args: __type__(args, commands)
+        "echo": echo_cmd,
+        "type": lambda args: type_cmd(args, commands),
+        "find": find_cmd,
     }
 
     while True:
