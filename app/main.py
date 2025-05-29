@@ -66,7 +66,14 @@ def main():
         if func:
             func(args)
         else:
-            print(f"{command}: command not found")
+            result = findtarget(command)
+            if result:
+                try:
+                    os.execvp(command, commarr)
+                except Exception as e:
+                    print(f"Execution failed: {e}")
+            else:
+                print(f"{command}: command not found")
 
 if __name__ == "__main__":
     main()
