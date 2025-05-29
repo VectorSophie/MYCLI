@@ -1,5 +1,6 @@
 import sys
 import os
+import subprocess
 
 def echo_cmd(args):
     print(" ".join(args))
@@ -69,7 +70,7 @@ def main():
             result = findtarget(command)
             if result:
                 try:
-                    os.execvp(command, commarr)
+                    subprocess.run(commarr)
                 except Exception as e:
                     print(f"Execution failed: {e}")
             else:
